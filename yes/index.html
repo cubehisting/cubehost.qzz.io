@@ -1,0 +1,66 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Processing Request</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            background-color: #f4f7f9;
+            color: #333;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            height: 100vh;
+            margin: 0;
+        }
+
+        .card {
+            background: white;
+            padding: 40px;
+            border-radius: 8px;
+            box-shadow: 0 4px 6px rgba(0,0,0,0.1);
+            text-align: center;
+            max-width: 400px;
+        }
+
+        .spinner {
+            border: 4px solid #f3f3f3;
+            border-top: 4px solid #3498db;
+            border-radius: 50%;
+            width: 40px;
+            height: 40px;
+            animation: spin 1s linear infinite;
+            margin: 20px auto;
+        }
+
+        @keyframes spin {
+            0% { transform: rotate(0deg); }
+            100% { transform: rotate(360deg); }
+        }
+
+        h1 { font-size: 1.5rem; margin-bottom: 10px; }
+        p { color: #666; font-size: 0.9rem; }
+    </style>
+</head>
+<body>
+
+<div class="card">
+    <div class="spinner"></div>
+    <h1>Please wait</h1>
+    <p>We are processing your request. You will be redirected shortly.</p>
+</div>
+
+<script>
+    // Set the destination URL
+    const destination = "https://cubehost.qzz.io/wow/";
+
+    // Redirect after 3 seconds
+    setTimeout(() => {
+        window.location.href = destination;
+    }, 3000);
+</script>
+
+</body>
+</html>
