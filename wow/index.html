@@ -1,0 +1,208 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Just a moment...</title>
+    <style>
+        body {
+            font-family: -apple-system, system-ui, BlinkMacSystemFont, "Segoe UI", Roboto, Oxygen, Ubuntu, "Helvetica Neue", Arial, sans-serif;
+            background-color: #ffffff;
+            color: #313131;
+            margin: 0;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            height: 100vh;
+            overflow: hidden;
+        }
+
+        .container {
+            width: 100%;
+            max-width: 600px;
+            padding: 20px;
+            text-align: left;
+        }
+
+        .logo-container {
+            margin-bottom: 30px;
+        }
+
+        .logo-container img {
+            height: 45px; /* Standard Cloudflare logo height */
+            width: auto;
+        }
+
+        h1 {
+            font-size: 32px;
+            font-weight: 500;
+            line-height: 1.2;
+            margin: 0 0 15px 0;
+            color: #000;
+        }
+
+        .status-text {
+            font-size: 16px;
+            line-height: 1.5;
+            margin-bottom: 30px;
+            color: #313131;
+        }
+
+        /* The Challenge Box */
+        .challenge-box {
+            border: 1px solid #e0e0e0;
+            border-radius: 4px;
+            padding: 15px 20px;
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            background: #fafafa;
+            width: 300px;
+            margin-bottom: 40px;
+        }
+
+        .spinner-container {
+            display: flex;
+            align-items: center;
+            gap: 15px;
+        }
+
+        .spinner {
+            width: 28px;
+            height: 28px;
+            border: 3px solid #0051c31a;
+            border-top: 3px solid #0051c3;
+            border-radius: 50%;
+            animation: spin 1s linear infinite;
+        }
+
+        .checkmark {
+            display: none;
+            width: 28px;
+            height: 28px;
+            background-color: #22c55e;
+            border-radius: 50%;
+            position: relative;
+        }
+
+        .checkmark::after {
+            content: '';
+            position: absolute;
+            left: 10px;
+            top: 5px;
+            width: 6px;
+            height: 12px;
+            border: solid white;
+            border-width: 0 3px 3px 0;
+            transform: rotate(45deg);
+        }
+
+        @keyframes spin {
+            0% { transform: rotate(0deg); }
+            100% { transform: rotate(360deg); }
+        }
+
+        .verify-text {
+            font-size: 14px;
+            color: #313131;
+        }
+
+        /* Footer Details */
+        .footer {
+            border-top: 1px solid #e0e0e0;
+            padding-top: 20px;
+            font-size: 13px;
+            color: #666;
+            line-height: 1.6;
+        }
+
+        .footer b {
+            color: #313131;
+        }
+
+        .footer-links {
+            margin-top: 15px;
+            font-size: 12px;
+            color: #999;
+        }
+
+        #ray-id {
+            font-family: monospace;
+            text-transform: uppercase;
+        }
+    </style>
+</head>
+<body>
+
+    <div class="container">
+        <div class="logo-container">
+            <!-- Your custom Skyflare logo -->
+            <img src="/skyflare.png" alt="Skyflare Logo">
+        </div>
+
+        <h1 id="main-heading">Checking if the site connection is secure</h1>
+        
+        <p class="status-text">
+            now.ct.ws needs to review the security of your connection before proceeding.
+        </p>
+
+        <div class="challenge-box">
+            <div class="spinner-container">
+                <div class="spinner" id="loader"></div>
+                <div class="checkmark" id="success-icon"></div>
+                <span class="verify-text" id="status-label">Verifying you are human...</span>
+            </div>
+        </div>
+
+        <div class="footer">
+            <div>Performance & security by <b>Skyflare</b></div>
+            <div style="margin-top: 10px;">
+                Ray ID: <span id="ray-id"></span> • 
+                Your IP: <span id="ip-addr"></span>
+            </div>
+        </div>
+
+        <div class="footer-links">
+            Privacy • Terms
+        </div>
+    </div>
+
+    <script>
+        // Generate a fake Ray ID
+        function generateRayID() {
+            const chars = 'abcdef0123456789';
+            let result = '';
+            for (let i = 0; i < 16; i++) {
+                result += chars.charAt(Math.floor(Math.random() * chars.length));
+            }
+            return result;
+        }
+
+        // Generate a fake IP (or you could fetch real one)
+        function generateFakeIP() {
+            return Math.floor(Math.random() * 255) + "." + 
+                   Math.floor(Math.random() * 255) + "." + 
+                   Math.floor(Math.random() * 255) + "." + 
+                   Math.floor(Math.random() * 255);
+        }
+
+        document.getElementById('ray-id').innerText = generateRayID();
+        document.getElementById('ip-addr').innerText = generateFakeIP();
+
+        // Verification Logic
+        setTimeout(() => {
+            // Change UI to success state
+            document.getElementById('loader').style.display = 'none';
+            document.getElementById('success-icon').style.display = 'block';
+            document.getElementById('status-label').innerText = 'Success!';
+            document.getElementById('main-heading').innerText = 'Connection is secure';
+
+            // Redirect after success animation
+            setTimeout(() => {
+                window.location.href = "https://now.ct.ws/";
+            }, 1000);
+
+        }, 3000); // 3-second mock check
+    </script>
+</body>
+</html>
